@@ -11,7 +11,7 @@ node {
     dir("UT") { 
         sh 'mvn clean install'
     }
-    stage('Build') { 
-        sh 'cp target/devops-test.war /tmp/'
+    stage('cp .war file') { 
+        sh 'cp UT/target/devops-test.war /tmp/'
     }
 }
