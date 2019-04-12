@@ -3,21 +3,17 @@
 properties([disableConcurrentBuilds()])
 
 pipeline {
-    agent any 
+    agent { 
+        label 'master'
+        }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+    }
     stages {
-        stage('Build') { 
+        stage("First step") {
             steps {
-                // 
-            }
-        }
-        stage('Test') { 
-            steps {
-                // 
-            }
-        }
-        stage('Deploy') { 
-            steps {
-                // 
+                sh 'ssh root@ub1 \'hostname\''
             }
         }
     }
