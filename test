@@ -3,7 +3,7 @@
 properties([disableConcurrentBuilds()])
 
 node {  
-    stage('Build') { 
+    stage('Build1') { 
         sh 'rm -rf UT' 
     }
     stage('Test') { 
