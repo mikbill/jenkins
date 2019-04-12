@@ -2,14 +2,6 @@ node {
      
     stage('Deploy Application') { 
         CLONECONTAINER = 'newJboss'
-         script {
-                    def fileName = "/var/lib/lxc/newJboss"
-                    File f = new File(fileName);
-                    if(f.exists()) 
-                    {       
-                        println (" Required files exists.. \n");
-                    }
-         } 
         sh "sudo lxc-destroy -n $CLONECONTAINER -f"
         sh 'sudo cp /tmp/devops-test.war $lxc_path/$container_name/rootfs/usr/local/share/jboss/standalone/deployments'
         sh "sudo lxc-copy -n $container_name -N $CLONECONTAINER -e"
