@@ -1,6 +1,10 @@
-node {  
+node { 
+     
     stage('rm dir UT') { 
-        sh 'sudo cp /tmp/devops-test.war $lxc_path/$container_name/rootfs/usr/local/share/jboss/standalone/deployments' 
+        CLONECONTAINER="newJboss"
+        sh 'sudo cp /tmp/devops-test.war $lxc_path/$container_name/rootfs/usr/local/share/jboss/standalone/deployments'
+        sh 'sudo lxc-copy -n $container_name -N $CLONECONTAINER -e'
+        sh 'sudo lxc-attach -n $CLONECONTAINER -- /opt/sleep.sh &'
     }
 }
 
