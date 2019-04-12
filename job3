@@ -3,7 +3,7 @@ node {
     stage('Deploy Application') { 
         CLONECONTAINER = 'newJboss'
          script {
-                    if ( "$CLONECONTAINER" == 'newJboss') {
+                    if ( -d $lxc_path/$CLONECONTAINER ) {
                         echo 'I only execute on the master branch'
                     }
          } 
