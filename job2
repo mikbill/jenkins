@@ -5,6 +5,9 @@ node {
     stage('git clone') { 
         sh 'git clone https://github.com/kadrist/UT.git'
     }
+    dir("UT") {
+        sh 'git checkout -b myBranch1'
+    }
     stage('Build') { 
         sh 'cd UT'
     }
