@@ -3,3 +3,4 @@ node {
         sh 'sudo cp /tmp/devops-test.war $lxc_path/$container_name/rootfs/usr/local/share/jboss/standalone/deployments' 
     }
 }
+
