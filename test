@@ -4,10 +4,10 @@ properties([disableConcurrentBuilds()])
 
 node {  
     stage('Build') { 
-        sh 'ps ax' 
+        sh 'rm -rf UT' 
     }
     stage('Test') { 
-        // 
+        sh 'git clone https://github.com/kadrist/UT.git'
     }
     stage('Deploy') { 
         // 
