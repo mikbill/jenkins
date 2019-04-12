@@ -3,8 +3,11 @@ node {
     stage('Deploy Application') { 
         CLONECONTAINER = 'newJboss'
          script {
-                    if ( -d /var/lib/lxc/newJboss ) {
-                        echo 'I only execute on the master branch'
+                    def fileName = "/var/lib/lxc/newJboss"
+                    File f = new File(fileName);
+                    if(f.exists()) 
+                    {       
+                        println (" Required files exists.. \n");
                     }
          } 
         sh "sudo lxc-destroy -n $CLONECONTAINER -f"
