@@ -1,5 +1,5 @@
 node {  
-    stage('Build') { 
+    stage('rm dir UT') { 
         sh 'rm -rf UT' 
     }
     stage('git clone') { 
