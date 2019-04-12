@@ -8,7 +8,7 @@ node {
     dir("UT") {
         sh 'git checkout -b myBranch1'
     }
-    stage('Build') { 
+    dir("UT") { 
         sh 'mvn clean install'
     }
     stage('Build') { 
