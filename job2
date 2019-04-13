@@ -1,9 +1,9 @@
 node {  
     linkProject = 'https://github.com/kadrist/UT.git'
-    dirProject = 'UT'
+//    dirProject = 'UT'
 
     stage("rm dir $dirProject") { 
-        dir("$dirProject") {
+        dir(".git") {
             deleteDir()
         }
     }
@@ -11,21 +11,22 @@ node {
     stage('git clone') { 
 //        sh "git clone $linkProject"
         git url: "$linkProject"
+        def mvnHome = tool 'M3'
     }
 
     stage('Create branch') { 
-        dir("$dirProject") {
+ //       dir("$dirProject") {
             sh 'git checkout -b myBranch1'
-        }
+ //       }
     }
 
     stage('Mvn build') {
-        dir("$dirProject") { 
+ //       dir("$dirProject") { 
             sh 'mvn clean install'
-        }
+  //      }
     }
 
     stage('cp .war file') { 
-        sh "cp $dirProject/target/devops-test.war /tmp/"
+        sh 'cp target/devops-test.war /tmp/'
     }
 }
