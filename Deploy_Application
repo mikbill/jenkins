@@ -1,0 +1,26 @@
+node { 
+    stage('Destroy container if ixists') {
+        cloneContainer = 'newJboss'
+        def exists = fileExists "/var/lib/lxc/$cloneContainer/config"
+        if (exists) {
+            sh "sudo lxc-destroy -n $cloneContainer -f"
+        }
+    }
+
+    stage('Cp file .war') { 
+        sh 'sudo cp /tmp/devops-test.war $lxc_path/$container_name/rootfs/usr/local/share/jboss/standalone/deployments'
+    }
+    
+    stage('Create clone container') {
+        sh "sudo lxc-copy -n $container_name -N $cloneContainer -e"
+    }
+
+    stage('Run poweroff script') {
+        sh "sudo lxc-attach -n $cloneContainer -- /opt/sleep.sh &"
+    }
+
+    stage('Chmod files') {
+        sh "sudo chmod 771 /var/lib/lxc/$cloneContainer"
+        sh "sudo chmod 775 /var/lib/lxc/$cloneContainer/config"
+    }
+}
