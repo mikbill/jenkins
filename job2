@@ -3,31 +3,30 @@ node {
     dirProject = 'UT'
 
     stage("rm dir $dirProject") { 
-        dir(".git") {
+        dir("$dirProject") {
             deleteDir()
         }
     }
 
     stage('git clone') { 
-//        sh "git clone $linkProject"
         dir("$dirProject") {
             git url: "$linkProject"
         }
     }
 
     stage('Create branch') { 
- //       dir("$dirProject") {
+        dir("$dirProject") {
             sh 'git checkout -b myBranch1'
- //       }
+        }
     }
 
     stage('Mvn build') {
- //       dir("$dirProject") { 
+        dir("$dirProject") { 
             sh 'mvn clean install'
-  //      }
+        }
     }
 
     stage('cp .war file') { 
-        sh 'cp target/devops-test.war /tmp/'
+        sh 'cp $dirProject/target/devops-test.war /tmp/'
     }
 }
