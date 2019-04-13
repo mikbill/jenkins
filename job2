@@ -1,24 +1,30 @@
 node {  
-    stage('rm dir UT') { 
- //       sh 'rm -rf UT'
-        dir("UT") {
+    linkProject = 'https://github.com/kadrist/UT.git'
+    dirProject = 'UT'
+
+    stage("rm dir $dirProject) { 
+        dir("$dirProject") {
             deleteDir()
         }
     }
 
     stage('git clone') { 
-        sh 'git clone https://github.com/kadrist/UT.git'
+        sh "git clone $linkProject"
     }
 
-    dir("UT") {
-        sh 'git checkout -b myBranch1'
+    stage('Create branch') { 
+        dir("$dirProject") {
+            sh 'git checkout -b myBranch1'
+        }
     }
 
-    dir("UT") { 
-        sh 'mvn clean install'
+    stage('Mvn build') {
+        dir("$dirProject") { 
+            sh 'mvn clean install'
+        }
     }
 
     stage('cp .war file') { 
-        sh 'cp UT/target/devops-test.war /tmp/'
+        sh "cp $dirProject/target/devops-test.war /tmp/"
     }
 }
