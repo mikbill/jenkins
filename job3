@@ -3,7 +3,6 @@ node {
         cloneContainer = 'newJboss'
         def exists = fileExists "/var/lib/lxc/$cloneContainer/config"
         if (exists) {
-            echo "YES"
             sh "sudo lxc-destroy -n $cloneContainer -f"
         }
     }
