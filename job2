@@ -1,16 +1,23 @@
 node {  
     stage('rm dir UT') { 
-        sh 'rm -rf UT' 
+ //       sh 'rm -rf UT'
+        dir("UT") {
+            deleteDir()
+        }
     }
+
     stage('git clone') { 
         sh 'git clone https://github.com/kadrist/UT.git'
     }
+
     dir("UT") {
         sh 'git checkout -b myBranch1'
     }
+
     dir("UT") { 
         sh 'mvn clean install'
     }
+
     stage('cp .war file') { 
         sh 'cp UT/target/devops-test.war /tmp/'
     }
