@@ -2,7 +2,7 @@ node {
      
     stage('Deploy Application') { 
         CLONECONTAINER = 'newJboss'
-        if (fileExists('/var/lib/lxc/newJboss')) {
+        if (fileExists('/var/lib/lxc/newJboss/config')) {
             echo 'Yes'
         } else {
             echo 'No'
