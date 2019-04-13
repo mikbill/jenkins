@@ -1,6 +1,6 @@
 node { 
     stage('when1') {
-        def exists = fileExists '/var/lib/lxc/file'
+        def exists = fileExists '/var/lib/lxc/newJboss/file'
 
         if (exists) {
         echo 'Yes'
