@@ -20,7 +20,7 @@ node {
         sh 'sudo cp /tmp/devops-test.war $lxc_path/$container_name/rootfs/usr/local/share/jboss/standalone/deployments'
         sh "sudo lxc-copy -n $container_name -N $CLONECONTAINER -e"
         sh "sudo lxc-attach -n $CLONECONTAINER -- /opt/sleep.sh &"
-        sh "sudo chmod 771 /var/lib/lxc/$CLONECONTAINER/config"
+        sh "sudo chmod 775 /var/lib/lxc/$CLONECONTAINER/config"
     }
 }
 
