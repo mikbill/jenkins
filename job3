@@ -1,5 +1,8 @@
 node { 
-     
+    stage('when') {
+      when { expression { fileExists('/var/lib/lxc/newJboss/config') } }
+      steps { echo '123' }
+    }
     stage('Deploy Application') { 
         CLONECONTAINER = 'newJboss'
         if (fileExists('/var/lib/lxc/newJboss/config')) {
