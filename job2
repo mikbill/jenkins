@@ -27,6 +27,6 @@ node {
     }
 
     stage('cp .war file') { 
-        sh "cp $dirProject/target/devops-test.war /tmp/"
+        sh "cp $dirProject/target/$mvn_file /tmp/"
     }
 }
