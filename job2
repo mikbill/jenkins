@@ -2,7 +2,7 @@ node {
     linkProject = 'https://github.com/kadrist/UT.git'
     dirProject = 'UT'
 
-    stage("rm dir $dirProject) { 
+    stage("rm dir $dirProject") { 
         dir("$dirProject") {
             deleteDir()
         }
