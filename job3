@@ -1,22 +1,14 @@
 node { 
     stage('when1') {
+        CLONECONTAINER = 'newJboss'
         def exists = fileExists '/var/lib/lxc/newJboss/config'
 
         if (exists) {
-        echo 'Yes'
-        } else {
-        echo 'No'
+            sh "sudo lxc-destroy -n $CLONECONTAINER -f"
         }
     }
 
     stage('Deploy Application') { 
-        CLONECONTAINER = 'newJboss'
-        if (fileExists('/var/lib/lxc/newJboss/config')) {
-            echo 'Yes'
-        } else {
-            echo 'No'
-        }
-
         sh 'sudo cp /tmp/devops-test.war $lxc_path/$container_name/rootfs/usr/local/share/jboss/standalone/deployments'
         sh "sudo lxc-copy -n $container_name -N $CLONECONTAINER -e"
         sh "sudo lxc-attach -n $CLONECONTAINER -- /opt/sleep.sh &"
