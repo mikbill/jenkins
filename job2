@@ -9,7 +9,8 @@ node {
     }
 
     stage('git clone') { 
-        sh "git clone $linkProject"
+//        sh "git clone $linkProject"
+        git url: "$linkProject"
     }
 
     stage('Create branch') { 
