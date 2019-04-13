@@ -1,6 +1,6 @@
 node { 
     stage('when1') {
-        def exists = fileExists '/file'
+        def exists = fileExists 'file'
 
         if (exists) {
         echo 'Yes'
