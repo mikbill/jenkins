@@ -1,6 +1,7 @@
 node { 
-    stage('Destroy container if ixists') {
-        cloneContainer = 'newJboss'
+    cloneContainer = 'newJboss'
+
+    stage('Destroy container if ixists') {      
         def exists = fileExists "/var/lib/lxc/$cloneContainer/config"
         if (exists) {
             sh "sudo lxc-destroy -n $cloneContainer -f"
@@ -8,7 +9,7 @@ node {
     }
 
     stage('Cp file .war') { 
-        sh 'sudo cp /tmp/devops-test.war $lxc_path/$container_name/rootfs/usr/local/share/jboss/standalone/deployments'
+        sh 'sudo cp /tmp/$mvn_file $lxc_path/$container_name/rootfs/usr/local/share/jboss/standalone/deployments'
     }
     
     stage('Create clone container') {
